@@ -28,34 +28,40 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
 		p2 = p2->next;
 		num2++;
 	}
-	p1 = l1;
-	p2 = l2;
-	length = num1 > num2 ? num1 : num2;
+	length = num1 > num2 ? num1 : num2 + 1;
 	struct ListNode *q = (struct ListNode*)malloc(sizeof(struct ListNode)*length);
 	while (q != NULL)
 	{
-		if (p1 != NULL && p2 != NULL)
+		if (p1 !=NULL && p2 != NULL)
 		{
 			q->val = p1->val + p2->val;
-			p1 = p1->next;
-			p2 = p2->next;
 		}
 		else if (p1 == NULL)
 		{
-			q->val = 0 +  
+			q->val = 0 + p2->val;
 		}
 		else if (p2 == NULL)
 		{
-			q->val =
+			q->val = 0 + p1->val;
 		}
+
+		if (q->val >= 10)
+		{
+			q->val = q->val - 10;
+			q->next->val = q->next->val + 1;
+		}
+		p1 = p1->next;
+		p2 = p2->next;
 	}
-
-
-
+	return q;
 }
 int main()
 {
-
+	struct ListNode* p1 = (struct ListNode*)malloc(sizeof(struct ListNode) * 2);
+	p1->val = 2;
+	struct ListNode* p2 = (struct ListNode*)malloc(sizeof(struct ListNode) * 2);
+	p2->val = 9;
+	addTwoNumbers(p1, p2);
 	system("pause");
 	return 0;
 }
