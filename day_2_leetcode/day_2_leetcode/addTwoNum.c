@@ -4,7 +4,7 @@
 
 如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。
 
-您可以假设除了数字 0 之外，这两个数都不会以 0 开头。*/
+您可以假设除了数字 0 之外，这两个数都不会以 0 开头。
 
 
 struct ListNode {
@@ -62,6 +62,39 @@ int main()
 	struct ListNode* p2 = (struct ListNode*)malloc(sizeof(struct ListNode) * 2);
 	p2->val = 9;
 	addTwoNumbers(p1, p2);
+	system("pause");
+	return 0;
+}整出来有问题
+*/
+
+int reverse(int x) {
+	int temp = x;
+	int count = 1;
+	long long sum = 0;
+	while (temp / 10)
+	{
+		temp /= 10;
+		count++;
+	}
+	if (count == 1)
+	return x;
+	while (x)
+	{
+		sum += (long long)((x % 10)*(pow(10, count - 1)));
+		count--;
+		x /= 10;
+	}
+	if (sum > pow(2, 31) - 1 || sum < -pow(2, 31))
+		sum = 0;
+	return sum;
+
+}
+
+int main()
+{
+	int a = 1534236469;
+	int b = reverse(a);
+	printf("%d  ", b);
 	system("pause");
 	return 0;
 }
