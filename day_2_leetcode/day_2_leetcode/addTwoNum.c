@@ -87,7 +87,6 @@ int reverse(int x) {
 	if (sum > pow(2, 31) - 1 || sum < -pow(2, 31))
 		sum = 0;
 	return sum;
-
 }
 
 int main()
