@@ -1,0 +1,4 @@
+﻿  LMS.cpp
+  test.cpp
+  正在生成代码...
+LINK : fatal error LNK1168: 无法打开 E:\我的C练习\leetcode\图书管理系统\Debug\图书管理系统.exe 进行写入
