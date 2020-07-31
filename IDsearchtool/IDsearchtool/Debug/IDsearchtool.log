@@ -1,0 +1,14 @@
+﻿  IDSearchTool.c
+e:\我的c练习\leetcode\bit83-master\idsearchtool\idsearchtool\idsearchtool.c(10): warning C4013: “DrawFrame”未定义；假设外部返回 int
+e:\我的c练习\leetcode\bit83-master\idsearchtool\idsearchtool\idsearchtool.c(11): warning C4013: “DrawMenu”未定义；假设外部返回 int
+e:\我的c练习\leetcode\bit83-master\idsearchtool\idsearchtool\idsearchtool.c(16): warning C4013: “SearchID”未定义；假设外部返回 int
+e:\我的c练习\leetcode\bit83-master\idsearchtool\idsearchtool\idsearchtool.c(21): warning C4013: “CheckID”未定义；假设外部返回 int
+e:\我的c练习\leetcode\bit83-master\idsearchtool\idsearchtool\idsearchtool.c(31): warning C4013: “SystemEnd”未定义；假设外部返回 int
+  idsearch.c
+e:\我的c练习\leetcode\bit83-master\idsearchtool\idsearchtool\idsearch.c(27): warning C4013: “DrawFrame”未定义；假设外部返回 int
+e:\我的c练习\leetcode\bit83-master\idsearchtool\idsearchtool\idsearch.c(28): warning C4013: “SetCurPos”未定义；假设外部返回 int
+e:\我的c练习\leetcode\bit83-master\idsearchtool\idsearchtool\idsearch.c(43): warning C4013: “DrawRow”未定义；假设外部返回 int
+  sysframe.c
+e:\我的c练习\leetcode\bit83-master\idsearchtool\idsearchtool\sysframe.c(79): warning C4018: “<”: 有符号/无符号不匹配
+  正在生成代码...
+  IDsearchtool.vcxproj -> E:\我的C练习\leetcode\IDsearchtool\Debug\IDsearchtool.exe
