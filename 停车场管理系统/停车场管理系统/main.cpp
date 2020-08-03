@@ -6,7 +6,10 @@ int main()
 {
 	int input = 0;
 	Car_list mylist;
+	Car_list Space_List;
 	CarListInit(&mylist);
+	CarListInit(&Space_List);
+	Parking_Space_initialization(&Space_List);
 	do
 	{
 		menu();
@@ -20,7 +23,7 @@ int main()
 			break;
 		case 1:
 			system("cls");
-			LoginCar(&mylist);
+			LoginCar(&mylist,&Space_List);
 			break;
 		case 2:
 			system("cls");
@@ -28,16 +31,16 @@ int main()
 			break;
 		case 3:
 			system("cls");
-			ChangeCar(&mylist);
+			ChangeCar(&mylist,&Space_List);
 			break;
 		case 4:
 			system("cls");
-			PickUpCar(&mylist);
+			PickUpCar(&mylist,&Space_List);
 			_flushall();
 			break;
 		case 5:
 			system("cls");
-			PrintResSpace(&mylist);
+			PrintResSpace(&mylist,&Space_List);
 			break;
 		case 6:
 			_flushall();

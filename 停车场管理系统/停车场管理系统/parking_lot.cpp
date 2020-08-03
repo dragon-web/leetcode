@@ -2,8 +2,7 @@
 
 //逻辑框架层
 
-
-void LoginCar(Car_list *plist)
+void LoginCar(Car_list *plist ,Car_list* MyspaceList)
 {
 	if (!CarListIsFull(plist))
 	{
@@ -17,6 +16,7 @@ void LoginCar(Car_list *plist)
 		int month;
 		int day;
 		CarNode *p;
+		CarNode *q = MyspaceList->first->next;
 		printf("请输入车主姓名\n");
 		scanf("%s", name);
 		getchar();
@@ -42,6 +42,23 @@ void LoginCar(Car_list *plist)
 		plist->last->next = p;
 		plist->last = p;
 		plist->last->next = NULL;
+		while (q != NULL)
+		{
+			if (q->number == Number)
+			{
+				strcpy(q->IDcard, p->IDcard);
+				strcpy(q->Owner, p->Owner);
+				q->Age = p->Age;
+				q->IsUsing = 1;
+				q->Sex = p->Sex;
+				q->partingTime.Day = p->partingTime.Day;
+				q->partingTime.Year = p->partingTime.Year;
+				q->partingTime.Month = p->partingTime.Month;
+				q->partingTime.Hour = p->partingTime.Hour;
+				break;
+			}
+			q = q->next;
+		}
 		printf("登记成功\n");
 		printf("\n");
 	}
@@ -73,6 +90,7 @@ CarNode* _Buynode(char* p, int sex, int age, char* number, int Pnumber, int year
 		s->Storage_time.Month = 0;
 		memcpy(s->IDcard, number, sz1);
 		s->number = Pnumber;
+		s->IsUsing = 1;
 		s->next = NULL;
 		return s;
 	}
@@ -119,7 +137,7 @@ bool SearchCar(Car_list* myCarList)
 	return false;
 }
 
-void ChangeCar(Car_list* myCarList)
+void ChangeCar(Car_list* myCarList, Car_list* MyspaceList)
 {
 	int num;
 	int temp;
@@ -134,6 +152,7 @@ void ChangeCar(Car_list* myCarList)
 	scanf("%d", &num);
 	getchar();
 	CarNode *p = myCarList->first;
+	CarNode* q = MyspaceList->first->next;
 	while (p != NULL)
 	{
 		if (p->number == num)
@@ -196,10 +215,27 @@ void ChangeCar(Car_list* myCarList)
 		printf("输入有误，返回主菜单");
 		printf("\n");
 	}
-	fclose(fp);
+
+	while (q != NULL)
+	{
+		if (q->number == num)
+		{
+			strcpy(q->IDcard, p->IDcard);
+			strcpy(q->Owner, p->Owner);
+			q->Age = p->Age;
+			q->IsUsing = 1;
+			q->Sex = p->Sex;
+			q->partingTime.Day = p->partingTime.Day;
+			q->partingTime.Year = p->partingTime.Year;
+			q->partingTime.Month = p->partingTime.Month;
+			q->partingTime.Hour = p->partingTime.Hour;
+			break;
+		}
+		q = q->next;
+	}
 }
 
-void PickUpCar(Car_list* myCarList)//取车
+void PickUpCar(Car_list* myCarList, Car_list* MyspaceList)//取车
 {
 	int Year;
 	int Month;
@@ -222,7 +258,7 @@ void PickUpCar(Car_list* myCarList)//取车
 	printf("您存车的时间是 %d年 %d月 %d日 %d时", (*p).partingTime.Year, (*p).partingTime.Month, (*p).partingTime.Day, (*p).partingTime.Hour);
 	
 	printf("您需要缴纳的费用为%d\n\n", Count_Fee(p));
-	DeleteCarNode(myCarList, p->number);
+	DeleteCarNode(myCarList, p->number,MyspaceList);
 	printf("取车成功,返回主菜单\n");
 	printf("\n");
 }
@@ -243,25 +279,41 @@ CarNode* Search_Car(Car_list* myCarList)
 	return NULL;
 }
 
-void PrintResSpace(Car_list* myCarList)
+void PrintResSpace(Car_list* myCarList,Car_list *SpaceList )
 {
 	printf("=============查询剩余车位===================\n");
 	CarNode* p = myCarList->first->next;
+	CarNode* q  = SpaceList->first->next;
 	assert(p != NULL);
 	while (p != NULL)
 	{
 		printf("当前使用中的车位号是 %d\n", p->number);
+		printf("当前车位信息是:\n");
+		printf("车主名字%s\n", p->IDcard);
+		printf("车主年龄%d", p->Age);
+		printf("车主性别 %s", ((p->Sex) == 0 ? "男": "女"));
+		printf("车主停车时间%d 年 %d 月 %d 日，%d 时",p->partingTime.Year,p->partingTime.Month,p->partingTime.Day,p->partingTime.Hour);
 		p = p->next;
 	}
-
 	printf("剩余车位数为: %zu \n", Space - myCarList->space);
+	printf("剩余车位为===================================\n");
+	while (q != NULL)
+	{
+		if (q->IsUsing == 0)
+		{
+			printf("====  %d  ======\n", q->number);
+		}
+		q = q->next;
+	}
 	printf("=============================================\n");
 }
 
-void DeleteCarNode(Car_list* myCarList, int key)
+void DeleteCarNode(Car_list* myCarList, int key,Car_list* Space_List)
 {
 	CarNode* p = myCarList->first;
 	CarNode* q = p->next;
+	CarNode* temp1 = Space_List->first;
+	CarNode* temp2 = temp1->next;
 	while (q != NULL)
 	{
 		if (q->number == key)
@@ -271,10 +323,16 @@ void DeleteCarNode(Car_list* myCarList, int key)
 		p = p->next;
 		q = q->next;
 	}
-
+	while (temp2 != NULL)
+	{
+		if (temp2->number == key)
+		{
+			temp2->IsUsing = 0;
+		}
+		temp1 = temp1->next;
+		temp2 = temp2->next;
+	}
 }
-
-
 int isYear(int year)
 {
 	return(year % 4 == 0) && (year % 400 == 0 || year % 100 != 0) ? 1 : 0;
@@ -346,3 +404,17 @@ int Count_Fee(CarNode *res)
 	FEE = Ryear * 12 * 800 + Rmonth * 800 + Rday * 40 + Rhour * 2;
 	return FEE;
 }
+void Parking_Space_initialization(Car_list* Spacelist)
+{
+	CarNode* p;
+	for (int i = 0; i < Space; ++i)
+	{
+		p = (CarNode*)malloc(sizeof(CarNode));
+		p->number = i + 1; // 记录车位号
+		p->IsUsing = 0; 
+		Spacelist->last->next = p;
+		Spacelist->last = p;
+		p->next = NULL;
+	}
+}
+
