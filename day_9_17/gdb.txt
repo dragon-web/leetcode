@@ -1,0 +1,21 @@
+gdb调试程序
+
+我们写程序的时候编译加上 -g选项
+
+gcc -g -o test test.c
+
+r : run 运行
+b ：break 设置断点
+n : next 执行当前语句，如果当前语句为函数调用，不会进入函数内部执行
+p :print  显示变量的值
+c:continue  继续运行程序直到下一个断点，如果当前后面没有断点直接运行到程序结束
+set var name=value
+设置变量的值，假设程序有两个变量：int ii; char name[21];
+
+set var ii=10 把ii的值设置为10；
+
+set var name="西施" 把name的值设置为"西施"，注意，不是strcpy
+
+
+
+
