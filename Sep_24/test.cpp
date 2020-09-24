@@ -3,69 +3,46 @@
 
 using namespace std;
 
-
 class Solution {
   public:
-    int sumVector(vector<int> dp)
+    int Count_One(int &num)
     {
-      int sum = 0;
-      auto it = dp.begin();
-      while(it != dp.end())
+      int count = 0;
+      while(num != 0)
       {
-        sum+= *it;
-        it++;
+        if(num % 10 == 1)
+        {
+          count++;
+
+        }
+        num /= 10;
 
       }
-      return sum;
+      return count;
 
     }
-    int FindGreatestSumOfSubArray(vector<int> array) {
-      vector<int> temp1;
-      vector<int> temp2;
-      vector<int>::iterator it = array.begin();
-      while(it != array.end())
+
+    int NumberOf1Between1AndN_Solution(int n)
+    {
+      int sum = 0;
+      int count = 0;
+      for(int i = 1;i <= n;++i)
       {
-        if(*it >= 0)
-        {
-          temp2.push_back(*it);
+        count = Count_One(i);
+        sum += count;
+        count = 0;
 
-        }
-        if(*it < 0)
-        {
-          temp2.clear();
-
-        }
-        if(sumVector(temp1) <= sumVector(temp2))
-        {
-          temp1 = temp2;
-
-        }    
-        it++;
-
-      }   
-      return sumVector(temp1);
-
-    }
-
+      }
+      return sum;        
+    }   
 };
-
 
 int main()
 {
-  int arr[] = {1,-2,3,10,-4,7,2,-5};
-  int sz = sizeof(arr)/sizeof(arr[0]);
-   vector<int> res;
-  for(int i = 0;i < sz ;++i)
-  {
-    res.push_back(arr[i]);
-  }
-  Solution test;
-  test.FindGreatestSumOfSubArray(res);
-
-
-
+  int num = 13;
+  Solution a;
+  int res = a.NumberOf1Between1AndN_Solution(num);
+  cout << res<<endl;
   return 0;
 }
-
-
 

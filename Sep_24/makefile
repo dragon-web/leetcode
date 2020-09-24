@@ -1,5 +1,5 @@
 test:test.cpp
-	gcc -o test -g test.cpp 
+	g++ -o test -g test.cpp 
 ./PHONY:
 clear:
 	rm -f test
