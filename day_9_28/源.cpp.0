@@ -1,0 +1,165 @@
+/*#include <iostream>
+#include <string>
+#include <vector>
+#include <windows.h>
+#include <stack>
+
+using namespace std;
+int findNthDigit(int n) 
+{
+        string temp = "";
+        for (int i = 0; i <= n; ++i)
+        {
+            temp += to_string(i);
+        }
+      //  cout << temp[10] << endl;
+        return temp[n] - '0';
+}
+
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        vector<int> vec;
+        if (nums.size() == 0)
+        {
+            return vec;
+        }
+        int begin = 0;
+        int  end = nums.size() - 1;
+        bool flag1 = 1;
+        bool flag2 = 1;
+        while (begin <= end)
+        {
+            if (nums[begin] == target && flag1)
+            {
+                vec.push_back(begin);
+                flag1 = 0;
+            }
+            if (nums[end] == target && flag2)
+            {
+                vec.push_back(end);
+                flag2 = 0;
+            }
+            begin++;
+            end--;
+        }
+        if (vec.size() < 2)
+        {
+            vec.resize(2, -1);
+        }
+        return vec;
+    }
+};
+
+class Solution1 {
+public:
+    int search(vector<int>& nums, int target) {
+        int len = nums.size();
+        int left = 0, right = len - 1;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (nums[mid] == target)
+                return mid;
+            else if (nums[mid] < nums[right]) {
+                if (nums[mid] < target && target <= nums[right])
+                    left = mid + 1;
+                else
+                    right = mid - 1;
+            }
+            else {
+                if (nums[left] <= target && target < nums[mid])
+                    right = mid - 1;
+                else
+                    left = mid + 1;
+            }
+        }
+        return -1;
+    }
+};
+int main()
+{
+    /*vector<int> v = {5,7,7,8,8,10};
+    Solution a;
+    a.searchRange(v,8);
+
+    stack<string> s;
+    s.push(2, "2");
+    
+	system("pause");
+	return 0;
+}
+
+
+#include <iostream>
+#include <string>
+#include <stack>
+#include <cctype>
+
+using namespace std;
+
+string calc(string l, string r, string op)
+{
+    string s;
+    if (op == "-")
+        s = to_string(stoi(l) - stoi(r));
+    return s;
+}
+
+int main()
+{
+    string s("1+2*(7-4)");
+    stack<string> stack;
+    for (auto iter = s.begin(); iter != s.end();)
+    {
+        if (*iter == '(')
+        {
+            stack.push(string(1, *iter));
+            ++iter;
+            while (*iter != ')')
+            {
+                stack.push(string(1, *iter));
+                ++iter;
+            }
+        }
+        else if (*iter == ')')
+        {
+            string r = stack.top(); stack.pop();
+            string op = stack.top(); stack.pop();
+            string l = stack.top(); stack.pop();
+            stack.pop();  //'('µ¯³ö
+            stack.push(calc(l, r, op));
+            ++iter;
+        }
+        else
+        {
+            ++iter;
+        }
+    }
+
+    while (!stack.empty())
+    {
+        cout << stack.top() << endl;
+        stack.pop();
+    }
+    return 0;
+}*/
+
+#include <iostream>
+#include <string>
+#include <stack>
+#include <cctype>
+#include <windows.h>
+
+
+using namespace std;
+
+int main()
+{
+    //string s1("1212");
+
+    char arr[5] = "abc";
+    string s(2,arr[0]);
+    cout << s.size() << endl;
+    system("pause");
+    return 0;
+}
